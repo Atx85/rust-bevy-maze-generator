@@ -23,12 +23,12 @@ impl<'a> RectDrawer<'a> {
             materials,
         }
     }
-    pub fn spawn(&mut self, x: f32,y: f32, width: f32, height: f32, color: Color)
+    pub fn spawn(&mut self, x: f32,y: f32, width: f32, height: f32, color: Color, z: f32)
     {
         self.commands.spawn((
             Mesh2d(self.meshes.add(Rectangle::new(width, height))),
             MeshMaterial2d(self.materials.add(color)), // RGB values exceed 1 to achieve a bright color for the bloom effect
-            Transform::from_xyz(x, y, 2.),
+            Transform::from_xyz(x, y, z),
         ));
     }
 }
@@ -68,7 +68,8 @@ impl Utils {
             top,
             cell_width,
             cell_height,
-            Color::Srgba(YELLOW_GREEN)
+            Color::Srgba(YELLOW_GREEN),
+            2.
         );
 
         if cell.has_border_right {
@@ -77,7 +78,8 @@ impl Utils {
                 top,
                 2.0,
                 cell_height,
-                Color::Srgba(MIDNIGHT_BLUE)
+                Color::Srgba(MIDNIGHT_BLUE),
+                3.
             );
         }
 
@@ -87,7 +89,8 @@ impl Utils {
                 top + cell_height / -2.0,
                 cell_width,
                 2.0,
-                Color::Srgba(MIDNIGHT_BLUE)
+                Color::Srgba(MIDNIGHT_BLUE),
+                3.
             );
         }
     }
